@@ -5,14 +5,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties(prefix = "mail")
-public class MailConfig {
+public class DatabaseConfig {
     private String Hostname;
     private int Port;
 
-    public  MailConfig() {
+    public DatabaseConfig() {
     }
 
-    public MailConfig(String hostname, int port) {
+    public DatabaseConfig(String hostname, int port) {
         this.Hostname = hostname;
         this.Port = port;
     }

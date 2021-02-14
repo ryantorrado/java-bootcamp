@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>To Do App</title>
+    <link th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-3">Add To Do</h1>
+        <form action="#" th:action="@{/todo/add-to-do}" th:object="${todo}" method="post">
+            <div class="form-group">
+                <label for="id">Name:</label>
+                <input type="text" id="id" th:field="*{name}" class="form-control mb-4 col-4">
+            </div>
+            <div class="form-group">
+                <label for="desc">Description</label>
+                <textarea id="desc" th:field="*{description}" class="form-control mb-4 col-4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-info">Save</button>
+            <a th:href="@{/todo/}" class="btn btn-danger">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
