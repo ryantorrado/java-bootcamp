@@ -3,16 +3,21 @@ package com.bootcamp.springboot.Model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tbl_todo")
-public class ToDo {
+@Table(name = "tbl_role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
+    private String roleName;
     private String description;
-    private boolean isDeleted;
 
-    public ToDo(){ }
+    public Role(){ }
+
+    public Role(Long id, String roleName, String description) {
+        this.id = id;
+        this.roleName = roleName;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;
@@ -22,20 +27,12 @@ public class ToDo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getDescription() {

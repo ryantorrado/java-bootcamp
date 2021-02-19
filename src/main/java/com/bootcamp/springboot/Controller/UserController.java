@@ -1,40 +1,57 @@
 package com.bootcamp.springboot.Controller;
 
 import com.bootcamp.springboot.Model.User;
-import com.bootcamp.springboot.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.bootcamp.springboot.Service.UserServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping(value ="/user")
 public class UserController {
-    private UserService userService;
+    private final UserServiceImpl userService;
 
-    @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/all")
-    ResponseEntity<List<User>> getAllUsers() {
-        List<User> allUsers = this.userService.GetAllUsers();
-        return new ResponseEntity<>(allUsers, HttpStatus.OK);
+    @GetMapping("/")
+    public String homePage(Model model) {
+        model.addAttribute("userList", userService.getAllUser());
+        return "user-index";
     }
 
-    @GetMapping("/get-user-by-id")
-    ResponseEntity<Object> getUserById(@RequestBody User user) {
-        List<User> userById = this.userService.GetUserById(user.getUserCode());
+    @GetMapping("/add-user-form")
+    public String addUserForm(Model model) {
+        User adduser = new User();
+        model.addAttribute("user", adduser);
+        return "user-add";
+    }
 
-        if (userById == null || userById.isEmpty()) {
-            return new ResponseEntity<>("User Not Found.", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(userById, HttpStatus.OK);
-        }
+    @PostMapping("/add-user")
+    public String addUser(@ModelAttribute("user") User user) {
+        userService.addUser(user);
+        return "redirect:/user/";
+    }
+
+    @GetMapping("/update-user-form/{id}")
+    public String updateUserForm(@PathVariable(value = "id") Long id, Model model) {
+        User user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "user-update";
+    }
+
+    @PostMapping("/update-user")
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.updateUserDetails(user.getId(),user.getFirstName(),user.getLastName(),user.isActive());
+        return "redirect:/user/";
+    }
+
+    @GetMapping("/delete-user/{id}")
+    public String deleteUser(@PathVariable(value = "id") Long id) {
+        User user = userService.getUserById(id);
+        user.setActive(false);
+        userService.addUser(user);
+        return "redirect:/user/";
     }
 }

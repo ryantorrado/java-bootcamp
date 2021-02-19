@@ -17,14 +17,14 @@ public class ToDoController {
     @GetMapping("/")
     public String homePage(Model model) {
         model.addAttribute("todoList", toDoService.getAllTodo());
-        return "index";
+        return "todo-index";
     }
 
     @GetMapping("/add-to-do-form")
     public String addToDoForm(Model model) {
         ToDo addTodo = new ToDo();
         model.addAttribute("todo", addTodo);
-        return "add-todo-form";
+        return "todo-add";
     }
 
     @PostMapping("/add-to-do")
@@ -37,12 +37,15 @@ public class ToDoController {
     public String updateToDoForm(@PathVariable(value = "id") Long id, Model model) {
         ToDo toDo = toDoService.getToDoById(id);
         model.addAttribute("todo", toDo);
-        return "update-todo-form";
+        return "todo-update";
     }
 
     @GetMapping("/delete-to-do/{id}")
-    public String deleteToDO(@PathVariable(value = "id") Long id) {
-        toDoService.deleteToDoById(id);
+    public String deleteToDo(@PathVariable(value = "id") Long id) {
+//        toDoService.deleteToDoById(id);
+        ToDo toDo = toDoService.getToDoById(id);
+        toDo.setDeleted(true);
+        toDoService.addToDo(toDo);
         return "redirect:/todo/";
     }
 }

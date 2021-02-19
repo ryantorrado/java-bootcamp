@@ -1,4 +1,4 @@
-package com.bootcamp.springboot;
+package com.bootcamp.springboot.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;

@@ -1,4 +1,4 @@
-package com.bootcamp.springboot.Service;
+package com.bootcamp.springboot.Service.Interface;
 
 import com.bootcamp.springboot.Model.ToDo;
 
