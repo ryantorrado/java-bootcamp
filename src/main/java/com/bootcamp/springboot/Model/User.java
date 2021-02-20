@@ -1,15 +1,12 @@
 package com.bootcamp.springboot.Model;
 
-import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
-import javax.persistence.Id;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@DynamicUpdate
 @Table(name = "tbl_user")
 public class User {
     @Id

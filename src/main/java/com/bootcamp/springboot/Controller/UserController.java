@@ -41,12 +41,6 @@ public class UserController {
         return "user-update";
     }
 
-    @PostMapping("/update-user")
-    public String updateUser(@ModelAttribute("user") User user) {
-        userService.updateUserDetails(user.getId(),user.getFirstName(),user.getLastName(),user.isActive());
-        return "redirect:/user/";
-    }
-
     @GetMapping("/delete-user/{id}")
     public String deleteUser(@PathVariable(value = "id") Long id) {
         User user = userService.getUserById(id);

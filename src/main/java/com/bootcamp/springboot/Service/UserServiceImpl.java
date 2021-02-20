@@ -63,9 +63,4 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
         }
         return user;
     }
-
-    @Override
-    public void updateUserDetails(Long id, String firstName, String lastName, boolean isActive) {
-        iUserRepository.updateUser(id, firstName, lastName, isActive);
-    }
 }
